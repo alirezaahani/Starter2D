@@ -66,6 +66,38 @@ int Formation::getSegment(rcsc::Vector2D focus_point)
     return -1;
 }
 
+/* New segmentaion algorithm -- NOT TESTED --
+int Formation::getSegmentNew(Vector2D point) {
+  // Shift origin to field center
+  point.x += 60; 
+  point.y += 40;
+
+  // Compute segment id using modulus
+  int segmentX = (point.x % X_STEP) / X_STEP;
+  int segmentY = (point.y % Y_STEP) / Y_STEP;
+
+  return segmentY * (60/X_STEP) + segmentX;
+}
+
+#include <cassert>
+void testAlgorithm() {
+    Vector2D testPoints[] = {
+      {-60, -40}, {-60, -20}, {-60, 0}, 
+      {-30, -40}, {-30, -20}, {-30, 0},
+      {0, -40}, {0, -20}, {0, 0},
+      {30, -40}, {30, -20}, {30, 0},
+      {60, -40}, {60, -20}, {60, 0} 
+    };
+    
+    for(Vector2D point : testPoints) {
+      int segOld = getSegment(point);
+      int segNew = getSegmentNew(point);
+      
+      assert(segOld == segNew); 
+    }
+}
+*/
+
 Formation::Situation Formation::getCurrentSituation(const rcsc::WorldModel &wm)
 {
     Situation current_situation = Situation::Normal;
